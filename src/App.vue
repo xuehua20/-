@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view />
+    <!-- 根路径模板里面只能写一个div作为根节点
+    -->
   </div>
 </template>
-
+// lang 用来什么属性
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
