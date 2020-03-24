@@ -4,3 +4,4 @@
 //app.vue负责写标签啊类的内容
 //npm run serve 打开服务器
 //项目如果push失败 加这命令 git config --global credential.helper manager
+//开启服务器npm run serve
