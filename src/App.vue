@@ -7,6 +7,7 @@
 </template>
 // lang 用来什么属性
 <style lang="less">
+@import url("../node_modules/vant/lib/index.css");
 * {
   margin: 0 auto;
   padding: 0;
