@@ -16,6 +16,10 @@ const routes = [
     //组件的懒加载,只有当我访问这个页面的时候,才会加载这个js文 件 @代表src这个目录
     // .vue这个扩展名可以忽略
     component: () => import("@/views/Login")
+  },
+  {
+    path: "/register",
+    component: () => import("@/views/Register")
   }
 ];
 

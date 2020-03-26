@@ -1,4 +1,4 @@
-<template>
+<template >
   <div>
     <div class="container">
       <div class="row">
@@ -29,20 +29,27 @@
               :rules="[{ required: true, message: '请填写用户名' }]"
             />
             <van-field
+              v-model="form.nickname"
+              name="昵称"
+              placeholder="昵称"
+              :rules="[{ required: true, message: '请填写昵称' }]"
+            />
+            <van-field
               v-model="form.password"
               type="password"
               name="密码"
               placeholder="密码"
               :rules="[{ required: true, message: '请填写密码' }]"
             />
+
             <div style="margin: 16px;">
               <!-- 这个按钮在组件内部的话,当点击按钮的时候就会触发提交事件 -->
-              <van-button round block native-type="submit">登录</van-button>
+              <van-button round block native-type="submit">注册</van-button>
             </div>
           </van-form>
         </div>
         <div class="col-sm-12 register">
-          <router-link to="/register">没有账号?前往注册</router-link>
+          <router-link to="/login">已有账号?前往登录</router-link>
         </div>
       </div>
     </div>
@@ -54,28 +61,16 @@ export default {
     return {
       form: {
         username: "",
-        password: ""
+        password: "",
+        nickname: ""
       }
     };
   },
   methods: {
-    // login() {
-    //   console.log(this.form);
-
-    //   this.$axios({
-    //     url: "http://127.0.0.1:3000/login",
-    //     method: "post",
-    //     data: this.form
-    //   }).then(response => {
-    //     console.log(response);
-    //     const { message } = response.data;
-    //     this.$toast.success(message); //success 这个弹窗框插件成功后的提示
-    //   });
-    // }
     onSubmit() {
       //该事件是 通过校验了才触发
       this.$axios({
-        url: "http://127.0.0.1:3000/login",
+        url: "/register",
         method: "post",
         data: this.form
       }).then(response => {
@@ -87,10 +82,7 @@ export default {
   }
 };
 </script>
-
 <style lang="less" scoped>
-// 加scoped  后.表示当前样式只会当前组件有用
-
 .container {
   .shut {
     padding-top: 0.2rem;
