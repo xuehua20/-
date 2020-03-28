@@ -59,19 +59,6 @@ export default {
     };
   },
   methods: {
-    // login() {
-    //   console.log(this.form);
-
-    //   this.$axios({
-    //     url: "http://127.0.0.1:3000/login",
-    //     method: "post",
-    //     data: this.form
-    //   }).then(response => {
-    //     console.log(response);
-    //     const { message } = response.data;
-    //     this.$toast.success(message); //success 这个弹窗框插件成功后的提示
-    //   });
-    // }
     onSubmit() {
       //该事件是 通过校验了才触发
       this.$axios({
@@ -79,9 +66,13 @@ export default {
         method: "post",
         data: this.form
       }).then(response => {
-        console.log(response);
-        const { message } = response.data;
+        const { message, data } = response.data;
         this.$toast.success(message); //success 这个弹窗框插件成功后的提示
+
+        console.log(data);
+        //把数据存到本地存储
+        localStorage.setItem("data", JSON.stringify(data));
+        this.$router.push("/personal");
       });
     }
   }
