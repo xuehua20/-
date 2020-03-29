@@ -1,18 +1,25 @@
 <template >
   <div class="navhead">
     <ul>
-      <li>
+      <li @click="data.path">
         <i class="iconfont iconjiantou"></i>
       </li>
-      <li>个人中心</li>
+      <li>{{data.title}}</li>
       <li>
-        <i class="iconfont iconshouye"></i>
+        <!-- 首页图标等于个人中心的时候才显示 -->
+        <i class="iconfont iconshouye" v-if="data.title==='个人中心'"></i>
       </li>
     </ul>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["data"],
+  mounted() {
+    //接收到快递
+    console.log(this.data);
+  }
+};
 </script>
 <style lang="less" scoped>
 .navhead {

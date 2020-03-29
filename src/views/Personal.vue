@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <navHead />
+    <navHead :data="title" />
     <div class="user">
       <div>
-        <img src="../image/daji.jpg" alt />
+        <img :src="head_img" alt />
       </div>
       <div>
         <span>
@@ -16,8 +16,12 @@
       <div>
         <i class="iconfont iconjiantou1"></i>
       </div>
+      <router-link to="/edit" />
     </div>
-    <list v-for="item in listh" :key="item" :data="item"></list>
+    <list v-for="item in listh" :key="item.name" :data="item"></list>
+    <div class="btn">
+      <button>退出登录</button>
+    </div>
   </div>
 </template>
 <script>
@@ -34,6 +38,10 @@ export default {
   },
   data() {
     return {
+      title: {
+        title: "个人中心",
+        path: () => {}
+      },
       listh: [
         {
           name: "我的关注",
@@ -58,8 +66,6 @@ export default {
     //组件样式加载完后开始发送请求
     //先从本地拿到验证 和要传的参数
     const str = JSON.parse(localStorage.getItem("data"));
-    console.log(str.token);
-    console.log(str.user.id);
     //请求方式不写的话.默认是get请求
     this.$axios({
       url: `/user/${str.user.id}`, //拼接动态id值传给后台
@@ -69,13 +75,11 @@ export default {
       }
     }).then(response => {
       const { data } = response.data;
-
       const { nickname, head_img, create_date, gender } = data;
       this.nickname = nickname;
-      this.head_img = head_img;
+      this.head_img = this.$axios.defaults.baseURL + head_img;
       this.gender = gender;
-      console.log(data);
-
+      //把图片重新存回本地存储
       //调用日期转换插件.然后赋值给 this.create_date再渲染
       this.create_date = moment(create_date).format("YYYY/MM/DD");
     });
@@ -85,7 +89,9 @@ export default {
 
 <style lang="less" scoped>
 .container {
+  position: relative;
   .user {
+    position: relative;
     font-size: 0.266667rem;
     display: flex;
     border-bottom: 0.066667rem solid #e4e4e4;
@@ -127,6 +133,23 @@ export default {
 
       width: 1.333333rem;
       border-radius: 50%;
+    }
+    a {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .btn {
+    position: fixed;
+    bottom: 0.266667rem;
+    padding: 0rem;
+    button {
+      width: 100%;
+      background-color: greenyellow;
+      border-radius: 0.333333rem;
+      font-size: 0.333333rem;
+      padding: 0.133333rem;
     }
   }
 }

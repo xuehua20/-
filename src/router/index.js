@@ -24,6 +24,10 @@ const routes = [
   {
     path: "/personal",
     component: () => import("@/views/Personal")
+  },
+  {
+    path: "/edit",
+    component: () => import("@/views/Edituser")
   }
 ];
 
@@ -39,7 +43,7 @@ router.beforeEach((to, form, next) => {
     //即将进入个人中心的时候判断一下是否有token值
     let token = JSON.parse(localStorage.getItem("data")) || [];
     console.log(token);
-    if (token != "") {
+    if (token.token != "") {
       //如果有.让进来,如果没有不让进来
       next();
     } else {

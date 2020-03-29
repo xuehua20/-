@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <ul>
-      <li>
+      <li @click="data.add">
         <p>{{ data.name }}</p>
         <p>{{ data.user }}</p>
         <i class="iconfont iconjiantou1"></i>
@@ -12,7 +12,7 @@
 <script>
 export default {
   //接收父组件传的值
-  props: ["data"]
+  props: ["data", "index"]
   // data() {}
 };
 </script>

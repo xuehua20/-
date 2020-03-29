@@ -67,7 +67,6 @@ export default {
         data: this.form
       }).then(response => {
         const { message, data } = response.data;
-        this.$toast.success(message); //success 这个弹窗框插件成功后的提示
 
         console.log(data);
         //把数据存到本地存储
