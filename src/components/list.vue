@@ -4,6 +4,7 @@
       <li>
         <p>{{ data.name }}</p>
         <p>{{ data.user }}</p>
+        <i class="iconfont iconjiantou1"></i>
       </li>
     </ul>
   </div>
@@ -30,6 +31,10 @@ export default {
       }
       :nth-child(2) {
         text-align: right;
+      }
+      i {
+        font-size: 0.333333rem;
+        padding-left: 0.333333rem;
       }
     }
   }

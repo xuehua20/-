@@ -33,5 +33,20 @@ const router = new VueRouter({
   //传值
   routes
 });
-
+//路由守卫,也叫导航卫士
+router.beforeEach((to, form, next) => {
+  if (to.path === "/personal") {
+    //即将进入个人中心的时候判断一下是否有token值
+    let token = JSON.parse(localStorage.getItem("data")) || [];
+    console.log(token);
+    if (token != "") {
+      //如果有.让进来,如果没有不让进来
+      next();
+    } else {
+      router.replace("/login");
+    }
+  } else {
+    next();
+  }
+});
 export default router;

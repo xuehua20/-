@@ -38,5 +38,5 @@ router.beforeEach((to,form,next)=>{
 
 })
 
-
+showHome 这个属性.如果传ture 那么就显示
 */

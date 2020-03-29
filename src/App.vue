@@ -45,9 +45,9 @@
   margin: 0 auto;
   padding: 0;
 }
-body {
-  background-color: #f2f2f2 !important;
-}
+// body {
+//   background-color: #f2f2f2 !important;
+// }
 a {
   text-decoration: none;
   color: inherit; //颜色继承所有父属性

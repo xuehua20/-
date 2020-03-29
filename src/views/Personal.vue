@@ -1,15 +1,14 @@
 <template>
   <div class="container">
-    <div>个人中心</div>
+    <navHead />
     <div class="user">
       <div>
-        <img src="../image/daji.jpg" alt="" />
+        <img src="../image/daji.jpg" alt />
       </div>
       <div>
         <span>
           <i class="iconfont iconxingbienan" v-if="gender === 1"></i>
           <i class="iconfont iconxingbienv" v-if="gender === 0"></i>
-
           {{ nickname }}
         </span>
         <span>{{ create_date }}</span>
@@ -24,12 +23,14 @@
 <script>
 //引入子组件
 import list from "../components/list";
+import navHead from "../components/navHead";
 //引入日期格式化软件
 import moment from "moment";
 export default {
   components: {
     //   注册子组件
-    list
+    list,
+    navHead
   },
   data() {
     return {
@@ -85,11 +86,9 @@ export default {
 <style lang="less" scoped>
 .container {
   .user {
-    margin: 0.146667rem 0;
-    padding: 0 0 0.2rem;
     font-size: 0.266667rem;
     display: flex;
-    border-bottom: 5px solid #e4e4e4;
+    border-bottom: 0.066667rem solid #e4e4e4;
     :nth-child(1) {
       padding-right: 0rem;
       margin: 0.213333rem 0.066667rem 0.213333rem 0;
@@ -103,6 +102,9 @@ export default {
       justify-content: center;
       span {
         margin: 0rem;
+        .iconfont {
+          font-size: 0.333333rem;
+        }
       }
     }
     :nth-child(3) {
