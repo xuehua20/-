@@ -23,26 +23,48 @@ const routes = [
   },
   {
     path: "/personal",
-    component: () => import("@/views/Personal")
+    component: () => import("@/views/Personal"),
+    //mata 路由可通过它自定义数据,可以选择在路由随意加上自己的数据
+    //它的值可以是任意类型
+    mata: {
+      //代表这个页面需要授权
+      authorization: true
+    }
   },
   {
     path: "/edit",
-    component: () => import("@/views/Edituser")
+    component: () => import("@/views/Edituser"),
+    mata: {
+      //代表这个页面需要授权
+      authorization: true
+    }
   },
   //我的关注
   {
     path: "/attention",
-    component: () => import("@/views/Attention")
+    component: () => import("@/views/Attention"),
+    mata: {
+      //代表这个页面需要授权
+      authorization: true
+    }
   },
   //跟帖页面
   {
     path: "/followup",
-    component: () => import("@/views/Followup")
+    component: () => import("@/views/Followup"),
+    mata: {
+      //代表这个页面需要授权
+      authorization: true
+    }
   },
   //我的收藏
   {
     path: "/collect",
-    component: () => import("@/views/Collect")
+    component: () => import("@/views/Collect"),
+    mata: {
+      //代表这个页面需要授权
+      authorization: true
+    }
   }
 ];
 
@@ -54,7 +76,7 @@ const router = new VueRouter({
 });
 //路由守卫,也叫导航卫士
 router.beforeEach((to, form, next) => {
-  if (to.path === "/personal") {
+  if (to.mata.authorization === true) {
     //即将进入个人中心的时候判断一下是否有token值
     let token = JSON.parse(localStorage.getItem("data")) || [];
     console.log(token);
