@@ -28,6 +28,21 @@ const routes = [
   {
     path: "/edit",
     component: () => import("@/views/Edituser")
+  },
+  //我的关注
+  {
+    path: "/attention",
+    component: () => import("@/views/Attention")
+  },
+  //跟帖页面
+  {
+    path: "/followup",
+    component: () => import("@/views/Followup")
+  },
+  //我的收藏
+  {
+    path: "/collect",
+    component: () => import("@/views/Collect")
   }
 ];
 

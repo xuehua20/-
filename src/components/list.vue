@@ -13,7 +13,6 @@
 export default {
   //接收父组件传的值
   props: ["data", "index"]
-  // data() {}
 };
 </script>
 <style lang="less" scoped>

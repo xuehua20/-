@@ -45,15 +45,24 @@ export default {
       listh: [
         {
           name: "我的关注",
-          user: "关注的用户"
+          user: "关注的用户",
+          add: () => {
+            this.$router.replace("/attention");
+          }
         },
         {
           name: "我的跟帖",
-          user: "跟帖回复"
+          user: "跟帖回复",
+          add: () => {
+            this.$router.push("/followup");
+          }
         },
         {
           name: "我的收藏",
-          user: "文章/视频"
+          user: "文章/视频",
+          add: () => {
+            this.$router.push("/collect");
+          }
         }
       ],
       nickname: "",
@@ -141,11 +150,12 @@ export default {
     }
   }
   .btn {
-    position: fixed;
     bottom: 0.266667rem;
     padding: 0rem;
+    width: 100%;
     button {
       width: 100%;
+
       background-color: greenyellow;
       border-radius: 0.333333rem;
       font-size: 0.333333rem;

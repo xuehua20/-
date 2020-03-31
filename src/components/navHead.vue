@@ -26,7 +26,7 @@ export default {
   height: 0.866667rem;
   line-height: 0.666667rem;
   font-size: 0.333333rem;
-  border-bottom: 1px solid #e4e4e4;
+  // border-bottom: 1px solid #e4e4e4;
 
   ul {
     display: flex;

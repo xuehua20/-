@@ -95,8 +95,9 @@ export default {
     };
   },
   mounted() {
+    //组件加载完后触发
     let localuser = JSON.parse(localStorage.getItem("data"));
-    //从本地获取到昵称,进行赋值,好给其他的内容方便用
+    //从本地获取到数据,进行赋值,好给其他的内容方便用
     this.localuser = localuser;
     //获取用户详情
     this.$axios({
@@ -110,7 +111,7 @@ export default {
       this.head_img = this.$axios.defaults.baseURL + head_img; //设置头像
 
       this.listr[0].user = nickname; //设置昵称
-      this.user = nickname;
+      this.user = nickname; //给弹窗的输入框用
       //要么男要么女
       if (gender === 1) {
         this.listr[2].user = "男";
@@ -146,7 +147,7 @@ export default {
     },
     //发送修改用户信息的请求
     edit(data) {
-      this.$axios({
+      return this.$axios({
         url: "/user_update/" + this.localuser.user.id, //获取到id
         method: "post",
         headers: {
@@ -161,32 +162,42 @@ export default {
     },
     //修改昵称,密码,性别的弹窗 请求
     Changeuser(data, event) {
-      debugger;
       //编辑请求
       if (data === 1) {
-        this.edit({
+        //以返回值形式来调用.成功后再修改页面,这种方式也叫Promise
+        const edit = this.edit({
           nickname: this.user
         });
-        //同步修改当前页面显示信息
-        this.listr[0].user = this.user;
+        console.log(edit);
+
+        edit.then(response => {
+          //同步修改当前页面显示信息
+          this.listr[0].user = this.user;
+        });
       } else if (data === 2) {
-        this.edit({
+        const edit = this.edit({
           password: this.password
         });
-        //密码修改成功后返回登录页
-        this.$router.replace("/login");
+        edit.then(response => {
+          //密码修改成功后返回登录页
+          this.$router.replace("/login");
+        });
       } else {
         console.log(event.name);
         if (event.name === "女") {
-          this.edit({
+          const edit = this.edit({
             gender: 0
           });
-          this.listr[2].user = "女";
+          edit.then(response => {
+            this.listr[2].user = "女";
+          });
         } else {
-          this.edit({
+          const edit = this.edit({
             gender: 1
           });
-          this.listr[2].user = "男";
+          edit.then(response => {
+            this.listr[2].user = "男";
+          });
         }
       }
     }

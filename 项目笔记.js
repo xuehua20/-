@@ -17,6 +17,22 @@ data:     //参数
 }).then(Response => {
     这里是回调函数后的内容
 })
+执行成功后.可以有很多个.then ,如果想要用后面的很多.then又能实现封装  用封装函数的return形式返回值来用
+edit(data) {
+     return this.$axios({
+        url: "/user_update/" + this.localuser.user.id, //获取到id
+        method: "post",
+        headers: {
+          //获取到本地的token值
+          Authorization: this.localuser.token
+        },
+        data
+      }).then(response => {
+        this.$toast.success("修改成功"); //success 这个弹窗框插件成功后的提示
+        console.log();
+      });
+      let 接收返回值变量rut =this.edit({传参})
+      rut.then(()=>{执行内容})
 
 */
 //object-fit:contain   盒子正方形 图片长方形  这样设置样式会让图片不变形
@@ -39,4 +55,6 @@ router.beforeEach((to,form,next)=>{
 })
 
 showHome 这个属性.如果传ture 那么就显示
+
+flex-shrink:0 ;防止图片在flex布局下被挤压
 */
