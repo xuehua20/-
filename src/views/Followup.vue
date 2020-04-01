@@ -10,14 +10,14 @@
         <div class="concent-reply" v-if="item.parent">
           <div class="reply">
             <p>回复:{{item.parent.user.nickname}}</p>
-            <p>{{item.content}}</p>
+            <p>{{item.parent.content}}</p>
           </div>
-          <span>不是</span>
+          <span>{{item.content}}</span>
         </div>
-        <div class="headline">
+        <router-link to="#" class="headline">
           <a href="#">原文：{{item.post.title}}</a>
           <i class="iconfont iconjiantou1"></i>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -35,7 +35,10 @@ export default {
       //传头部
       head: {
         title: "我的跟帖",
-        path: () => {}
+        path: () => {
+          //点击返回个人中心
+          this.$router.replace("/personal");
+        }
       },
       //本地数据
       localuserdata: [],

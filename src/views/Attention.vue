@@ -32,7 +32,10 @@ export default {
       //传头部
       head: {
         title: "我的关注",
-        path: () => {}
+        path: () => {
+          //点击返回个人中心
+          this.$router.replace("/personal");
+        }
       },
       localuserdata: [], //本地数据
       followlist: [], //后台返回的关注列表

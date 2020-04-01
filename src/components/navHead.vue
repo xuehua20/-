@@ -7,7 +7,9 @@
       <li>{{data.title}}</li>
       <li>
         <!-- 首页图标等于个人中心的时候才显示 -->
-        <i class="iconfont iconshouye" v-if="data.title==='个人中心'"></i>
+        <i v-if="data.title==='个人中心'">
+          <router-link to="/index" class="iconfont iconshouye"></router-link>
+        </i>
       </li>
     </ul>
   </div>

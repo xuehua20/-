@@ -35,7 +35,7 @@ edit(data) {
       rut.then(()=>{执行内容})
 
 */
-//object-fit:contain   盒子正方形 图片长方形  这样设置样式会让图片不变形
+//object-fit:cover   盒子正方形 图片长方形  这样设置样式会让图片不变形
 //组件里面导入子组件/一定要写在script里面 不能写在export default里面, 所有引入的子组件都需要经过
 //components:{
 //注册才行
@@ -58,3 +58,5 @@ showHome 这个属性.如果传ture 那么就显示
 
 flex-shrink:0 ;防止图片在flex布局下被挤压
 */
+//如果在scoped声明中修改第三方的样式
+//   规定我们在样式前面加上这个 /deep/
