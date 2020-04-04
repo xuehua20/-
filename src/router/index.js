@@ -65,6 +65,11 @@ const routes = [
       authorization: true
     },
     component: () => import("@/views/Collect")
+  },
+  {
+    //首页
+    path: "/index",
+    component: () => import("@/views/Index")
   }
 ];
 
@@ -82,7 +87,7 @@ router.beforeEach((to, form, next) => {
     //即将进入个人中心的时候判断一下是否有token值
     let token = JSON.parse(localStorage.getItem("data")) || [];
     console.log(token);
-    if (token.token != "") {
+    if (token.length || token.token) {
       //如果有.让进来,如果没有不让进来
       next();
     } else {

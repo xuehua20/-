@@ -35,7 +35,7 @@ edit(data) {
       rut.then(()=>{执行内容})
 
 */
-//object-fit:cover   盒子正方形 图片长方形  这样设置样式会让图片不变形
+//object-fit:cover 设置Img标签里面   盒子正方形 图片长方形  这样设置样式会让图片不变形
 //组件里面导入子组件/一定要写在script里面 不能写在export default里面, 所有引入的子组件都需要经过
 //components:{
 //注册才行

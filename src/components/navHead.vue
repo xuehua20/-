@@ -19,7 +19,7 @@ export default {
   props: ["data"],
   mounted() {
     //接收到快递
-    console.log(this.data);
+    // console.log(this.data);
   }
 };
 </script>

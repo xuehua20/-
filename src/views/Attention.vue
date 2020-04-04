@@ -17,6 +17,9 @@
         </div>
       </div>
     </div>
+    <div class="container concernlist" v-if="followlist.length===0">
+      <router-link to="#">哎呀!空空的哦,点我去关注把</router-link>
+    </div>
   </div>
 </template>
 <script>

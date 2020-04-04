@@ -20,7 +20,9 @@
     </div>
     <list v-for="item in listh" :key="item.name" :data="item"></list>
     <div class="btn">
-      <button>退出登录</button>
+      <router-link to="/login">
+        <button>退出登录</button>
+      </router-link>
     </div>
   </div>
 </template>
