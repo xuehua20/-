@@ -5,10 +5,10 @@
         <i class="iconfont iconnew"></i>
       </div>
       <div class="searchbtn">
-        <a href="#">
+        <router-link to="/search">
           <i class="iconfont iconsearch"></i>
           <span>搜索新闻</span>
-        </a>
+        </router-link>
       </div>
       <div class="user">
         <router-link to="/personal" class="iconfont iconwode"></router-link>
@@ -18,7 +18,12 @@
     <!-- sticky 是否粘性布局 -->
     <!-- @scroll 是记录滚动条的距离页面的顶部距离的 -->
     <van-tabs v-model="active" swipeable sticky @scroll="scrollRecord">
-      <van-tab v-for="(item,index) in Categorylist" :key="index" :title="item.name">
+      <van-tab
+        v-for="(item,index) in Categorylist"
+        :key="index"
+        :title="item.name"
+        v-if="item.is_top===1"
+      >
         <!-- 下拉刷新 -->
         <!-- @refresh="onRefresh" -->
         <van-pull-refresh v-model="refreshing">
@@ -62,8 +67,6 @@ export default {
       //监听栏目的索引
       this.getArticlelist();
       //11.当栏目切换变化的时候开始记录原先位置.加个定时器好让同步执行,等数据渲染完再滚动
-      console.log(this.active, this.Categorylist[this.active].scrollY);
-
       setTimeout(() => {
         window.scrollTo(0, this.Categorylist[this.active].scroll);
       }, 20);
@@ -73,7 +76,7 @@ export default {
     let div1 = document.querySelector(".van-tabs__wrap");
     let div = document.createElement("div");
     div.innerHTML = `<div class="administration">
-        <a href="./personal" class="iconfont iconjiantou1"></a>
+        <a href="./Programa" class="iconfont iconjiantou1"></a>
       </div>`;
     div1.appendChild(div);
     //1.获取本地token值,
@@ -136,7 +139,6 @@ export default {
       const { id, pageIndex, finished, name, isload } = this.Categorylist[
         this.active
       ];
-
       //8.判断一下文章栏目是否是true已经加载完毕.加载完毕后无需再加载
       if (finished || isload) {
         return;
@@ -185,8 +187,6 @@ export default {
     },
     //6每个栏目都有自己的页数和自己的文章列表跟自己的是否加载完毕,和正在加载
     handleCategories() {
-      console.log(this.Categorylist);
-
       this.Categorylist = this.Categorylist.map(value => {
         value.pageIndex = 1; //页数
         value.post = []; //自己的文章列表
@@ -205,9 +205,8 @@ export default {
         return;
       }
       const { scrollTop } = data;
-
       this.Categorylist[this.active].scrollY = scrollTop;
-      console.log(this.Categorylist[this.active], this.Categorylist);
+      // console.log(this.Categorylist[this.active], this.Categorylist);
     }
   }
 };

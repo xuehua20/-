@@ -118,10 +118,8 @@ export default {
 
     div {
       margin: 0.4rem 0rem !important;
-      background-color: #f2f2f2 #2d2d2d;
     }
     div {
-      background-color: #f2f2f2;
       font-size: 0.266667rem;
     }
     .van-cell {

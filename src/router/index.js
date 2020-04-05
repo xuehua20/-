@@ -9,17 +9,17 @@ const routes = [
   {
     //路由重定向
     path: "/",
-    redirect: "/Login"
+    redirect: "/Login",
   },
   {
     path: "/login",
     //组件的懒加载,只有当我访问这个页面的时候,才会加载这个js文 件 @代表src这个目录
     // .vue这个扩展名可以忽略
-    component: () => import("@/views/Login")
+    component: () => import("@/views/Login"),
   },
   {
     path: "/register",
-    component: () => import("@/views/Register")
+    component: () => import("@/views/Register"),
   },
   {
     path: "/personal",
@@ -27,17 +27,17 @@ const routes = [
     //它的值可以是任意类型
     meta: {
       //代表这个页面需要授权
-      authorization: true
+      authorization: true,
     },
-    component: () => import("@/views/Personal")
+    component: () => import("@/views/Personal"),
   },
   {
     path: "/edit",
     component: () => import("@/views/Edituser"),
     meta: {
       //代表这个页面需要授权
-      authorization: true
-    }
+      authorization: true,
+    },
   },
   //我的关注
   {
@@ -45,8 +45,8 @@ const routes = [
     component: () => import("@/views/Attention"),
     meta: {
       //代表这个页面需要授权
-      authorization: true
-    }
+      authorization: true,
+    },
   },
   //跟帖页面
   {
@@ -54,30 +54,39 @@ const routes = [
     component: () => import("@/views/Followup"),
     meta: {
       //代表这个页面需要授权
-      authorization: true
-    }
+      authorization: true,
+    },
   },
   //我的收藏
   {
     path: "/collect",
     meta: {
       //代表这个页面需要授权
-      authorization: true
+      authorization: true,
     },
-    component: () => import("@/views/Collect")
+    component: () => import("@/views/Collect"),
   },
   {
     //首页
     path: "/index",
-    component: () => import("@/views/Index")
-  }
+    component: () => import("@/views/Index"),
+  },
+  //搜索页
+  {
+    path: "/search",
+    component: () => import("@/views/Search"),
+  },
+  {
+    path: "/programa",
+    component: () => import("@/views/Programa"),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history", //路由的模式
   base: process.env.BASE_URL, //当前路径
   //传值
-  routes
+  routes,
 });
 //路由守卫,也叫导航卫士
 router.beforeEach((to, form, next) => {

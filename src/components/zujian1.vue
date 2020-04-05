@@ -58,6 +58,7 @@ export default {
         flex-wrap: wrap;
         margin-top: 0.2rem;
         margin-left: 0;
+        margin-right: 0rem;
         font-size: 0.266667rem;
       }
       p {
@@ -66,17 +67,13 @@ export default {
         margin: 0;
       }
       .threeimg {
-        flex: 2;
-
         display: flex;
         padding-bottom: 0.133333rem;
 
         img {
-          height: 2rem;
+          height: 1.6rem;
           object-fit: cover;
           width: 95%;
-          // margin-left: 0;
-          // margin-right: 0.133333rem;
         }
         :nth-child(3) {
           margin-right: 0;

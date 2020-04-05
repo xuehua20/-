@@ -44,6 +44,7 @@
 * {
   margin: 0 auto;
   padding: 0;
+  box-sizing: border-box;
 }
 // body {
 //   background-color: #f2f2f2 !important;

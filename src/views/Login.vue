@@ -24,6 +24,7 @@
             -->
             <van-field
               v-model="form.username"
+              type="text"
               name="用户名"
               placeholder="用户名"
               :rules="[{ required: true, message: '请填写用户名' }]"
@@ -116,7 +117,7 @@ export default {
 
     div {
       margin: 0.4rem 0rem !important;
-      background-color: #f2f2f2 #2d2d2d;
+      // background-color: #2d2d2d !important;
     }
     div {
       font-size: 0.266667rem;

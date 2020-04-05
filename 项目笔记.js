@@ -60,3 +60,5 @@ flex-shrink:0 ;防止图片在flex布局下被挤压
 */
 //如果在scoped声明中修改第三方的样式
 //   规定我们在样式前面加上这个 /deep/
+//页面销毁的时候触发的事件.destroyed()
+//axios.defaults.baseURL = "http://hmtoutiao-api.atlansic.com" 线上地址
