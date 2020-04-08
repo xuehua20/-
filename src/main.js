@@ -9,6 +9,7 @@ axios.defaults.baseURL = "http://localhost:3000"; //配置接口地址哪里都�
 // axios.defaults.baseURL = "http://hmtoutiao-api.atlansic.com"; //线上地址
 import Vant, { Toast } from "vant"; //引入vant axios错误拦截器
 //生产坏境是否提示,就是上线的时候是否提示信息
+let app;
 Vue.config.productionTip = false;
 
 axios.interceptors.response.use(
@@ -24,12 +25,23 @@ axios.interceptors.response.use(
     if (statusCode === 400) {
       Toast.fail(message);
     }
-
+    // if (statusCode === 403) {
+    //没有权限登录的处理
+    //   Toast.fail(message);
+    //   app.$router.push({
+    //     path: "/login",
+    //     //quey代表问号后面的路径
+    //     query: {
+    //自己起的路径名字
+    //       return_url: app.$route.path,
+    //     },
+    //   });
+    // }
     return Promise.reject(error);
   }
 );
 //$mount("#app") 相当于el的配置.就是指定id为app的作为模板入口
-new Vue({
+app = new Vue({
   //路由对象
   router,
   //加载第一个子组件,最底层的组件,写法是固定的

@@ -76,7 +76,8 @@ export default {
         const { data } = response.data;
         // console.log(data);
         // this.followlist = data; //获取到数据进行赋值
-        this.followlist.splice(index, 1);
+        this.followlist.splice(index, 1); //进行截取删除
+        //展开后重新赋值
         this.followlist = [...this.followlist];
       });
     }

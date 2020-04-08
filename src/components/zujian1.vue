@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="content">
-        <div class="text" @click="pathnews(data.id)">
+        <div class="text" @click="pathnews(data.id,data.type)">
           <h4>{{data.title}}</h4>
           <!-- 图片大于1小于三的时候显示 -->
           <div class="threeimg" v-if="data.type === 1 && data.cover.length >= 3">
@@ -38,8 +38,12 @@ export default {
     // console.log(this.data);
   },
   methods: {
-    pathnews(data) {
-      this.$router.push(`/newsdetails/${data}`);
+    pathnews(data, type) {
+      if (type === 2) {
+        this.$router.push(`/video/${data}`);
+      } else {
+        this.$router.push(`/newsdetails/${data}`);
+      }
     }
   }
 };

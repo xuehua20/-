@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <router-view />
-    <!-- 根路径模板里面只能写一个div作为根节点
-    -->
+    <!-- keep-alive想缓存什么页面
+    include 指定谁是否被缓存,它取得是页面属性name的值 ,如果想要多个就,号隔开-->
+    <keep-alive include="index88,search">
+      <router-view />
+      <!-- 根路径模板里面只能写一个div作为根节点
+      -->
+    </keep-alive>
   </div>
 </template>
 // lang 用来什么属性

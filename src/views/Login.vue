@@ -68,11 +68,15 @@ export default {
         data: this.form
       }).then(response => {
         const { message, data } = response.data;
-
-        console.log(data);
         //把数据存到本地存储
+        debugger;
         localStorage.setItem("data", JSON.stringify(data));
-        this.$router.push("/personal");
+        //登录后去到哪里,有地址就跳地址.什么都没有才到个人中心
+        if (this.$route.query.return_url != undefined) {
+          this.$router.push(this.$route.query.return_url);
+        } else {
+          this.$router.push("/personal");
+        }
       });
     }
   }

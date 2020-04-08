@@ -46,7 +46,10 @@
 </template>
 <script>
 import zujian1 from "../components/zujian1"; //引入组件
+
 export default {
+  //用来确认是否缓存页面
+  name: "index88",
   components: {
     //注册组件
     zujian1
@@ -54,7 +57,7 @@ export default {
   data() {
     return {
       token: "", //本地token值
-      active: 0,
+      active: 1,
       refreshing: false,
       // finished: false,
       // loading: false,
@@ -68,8 +71,8 @@ export default {
       this.getArticlelist();
       //11.当栏目切换变化的时候开始记录原先位置.加个定时器好让同步执行,等数据渲染完再滚动
       setTimeout(() => {
-        window.scrollTo(0, this.Categorylist[this.active].scroll);
-      }, 20);
+        window.scrollTo(200, this.Categorylist[this.active].scrollY);
+      }, 5);
     }
   },
   mounted() {
@@ -206,7 +209,6 @@ export default {
       }
       const { scrollTop } = data;
       this.Categorylist[this.active].scrollY = scrollTop;
-      // console.log(this.Categorylist[this.active], this.Categorylist);
     }
   }
 };

@@ -86,6 +86,11 @@ const routes = [
     path: "/newsdetails/:id",
     component: () => import("@/views/Newsdetails"),
   },
+  //新闻详情.视频页
+  {
+    path: "/video/:id",
+    component: () => import("@/views/Video"),
+  },
 ];
 
 const router = new VueRouter({

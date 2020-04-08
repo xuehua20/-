@@ -60,6 +60,7 @@
 <script>
 import zujian1 from "../components/zujian1";
 export default {
+  name: "search",
   components: {
     zujian1
   },
@@ -122,6 +123,18 @@ export default {
   mounted() {
     //2.1从本地拿出数据后渲染到页面上
     this.historyarr = JSON.parse(localStorage.getItem("historyarr")) || [];
+  },
+  //局部路由导航守卫
+  // from 从哪里来
+  //vm回调函数.可使用this
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      //如果是从首页来的就清空搜索记录
+      if (from.path === "/index") {
+        vm.value = "";
+        vm.showHome = false;
+      }
+    });
   }
 };
 </script>

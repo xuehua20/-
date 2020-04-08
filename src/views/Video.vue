@@ -1,12 +1,16 @@
 <template>
   <div>
+    <div class="head-video">
+      <video :src="$axios.defaults.baseURL+post.content" width="100%" muted controls></video>
+    </div>
+    <div class="head-video1">
+      <span class="iconfont iconjiantou" @click="$router.back()"></span>
+    </div>
     <div class="container">
-      <div class="head">
+      <div class="user">
         <div class="left">
-          <!-- $router.back() 这样后退上一页会有记录在 -->
-          <i class="iconfont iconjiantou" @click="$router.back()"></i>
-          <!-- <router-link to="/index" class="iconfont iconjiantou"></router-link> -->
-          <i class="iconfont iconnew"></i>
+          <img :src="$axios.defaults.baseURL+post.user.head_img" />
+          <p>{{post.user.nickname}}</p>
         </div>
         <div class="rgiht">
           <span
@@ -17,13 +21,7 @@
       </div>
       <div class="title">
         <h4>{{post.title}}</h4>
-        <span>{{post.user.nickname}} {{moment(post.create_date).format("YYYY/MM/DD hh:mm:ss")}}</span>
       </div>
-      <!-- 类型为普通类型的显示 -->
-      <div class="content" v-html="post.content" v-if="post.type===1"></div>
-      <!-- <div class="content video" v-if="post.type===2">
-        <video :src="$axios.defaults.baseURL+post.content" width="100%" muted controls></video>
-      </div>-->
       <div class="botton">
         <span>
           <i class="iconfont icondianzan" @click="getlike()"></i>
@@ -34,21 +32,11 @@
           微信
         </span>
       </div>
+      <bottomnav :post="this.post" />
     </div>
-    <bottomnav :post="this.post" />
-    <!-- <div class="footer">
-      <input type="text" />
-      <span class="iconfont iconpinglun-">
-        <i>{{post.comment_length > 100 ? `99+` : post.comment_length}}</i>
-      </span>
-      <i class="iconfont iconshoucang" :class="post.has_star?'active ' :'' " @click="collect"></i>
-      <i class="iconfont iconfenxiang"></i>
-    </div>-->
   </div>
 </template>
 <script>
-//引入日期格式化软件
-import moment from "moment";
 import bottomnav from "../components/bottomnav";
 export default {
   components: {
@@ -56,12 +44,10 @@ export default {
   },
   data() {
     return {
-      // 这样可以防止数据没有来的及回来nickname报错//
       post: {
         user: {}
       },
-      moment, //日期格式插件
-      token: {}
+      token: ""
     };
   },
   mounted() {
@@ -148,117 +134,76 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
-  font-size: 0.333333rem;
   border-bottom: solid 0.066667rem #cccccc;
-  margin-bottom: 1.333333rem;
-  .title {
-    margin-bottom: 17px;
-    h4 {
-      font-size: 0.346667rem;
-      font-weight: 700;
-      margin-bottom: 5px;
+}
+.head-video1 {
+  span {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 0.666667rem;
+    height: 0.666667rem;
+    font-size: 0.4rem;
+    color: #fff;
+  }
+}
+.user {
+  font-size: 0.333333rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 30px 0;
+
+  .left {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    p {
+      margin: 0;
+      margin-left: 0.133333rem;
+      color: #ccc;
+      font-size: 0.266667rem;
     }
 
-    span {
-      font-size: 0.266667rem;
-      color: #cccccc;
-      background-color: #fff;
+    img {
+      width: 0.533333rem;
+      border-radius: 50%;
     }
   }
-  .head {
-    height: 0.8rem;
-    line-height: 0.8rem;
-    margin-bottom: 0.2rem;
-    display: flex;
-    justify-content: space-between;
-    .left {
-      margin: 0;
-      display: flex;
-      i {
-        width: 0.533333rem;
-        font-size: 0.4rem;
-      }
-      .iconnew {
-        font-size: 0.8rem;
-      }
-    }
-    .rgiht {
-      margin: 0;
-      span {
-        font-size: 0.266667rem;
-        border: 0.013333rem solid #dedede;
-        border-radius: 0.333333rem;
-        padding: 0.066667rem 0.226667rem;
-      }
-      .active {
-        background-color: #ff0000;
-      }
-    }
-  }
-  .botton {
-    margin: 25px;
-    display: flex;
-    span {
-      border: 0.013333rem solid #dedede;
-      padding: 0.066667rem 0.266667rem;
-      border-radius: 0.333333rem;
-      i {
-        font-size: 0.333333rem;
-      }
-    }
-    :nth-child(2) {
-      i {
-        color: green;
-      }
-    }
-  }
-}
-.content {
-  /deep/img {
-    width: 100%;
-  }
-  /deep/p {
+  .rgiht {
     margin: 0;
+    span {
+      border: 0.013333rem solid #cccccc;
+      padding: 0 0.133333rem;
+      border-radius: 0.333333rem;
+    }
+    .active {
+      background-color: red;
+    }
   }
 }
-// .footer {
-//   position: fixed;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   font-size: 0.333333rem;
-//   display: flex;
-//   margin: 0 0.253333rem;
-//   background-color: #fff;
-//   input {
-//     background-color: #d7d7d7;
-//     border-radius: 0.333333rem;
-//     margin-right: 0.2rem;
-//     margin: 0.133333rem 0.2rem;
-//   }
-//   .iconfont {
-//     font-size: 0.5rem;
-//     margin-right: 0.533333rem;
-//   }
-//   span {
-//     position: relative;
-//     i {
-//       position: absolute;
-//       top: -2px;
-//       left: 4px;
-//       font-size: 12px;
-//       width: 0.466667rem;
-//       background-color: #ff0000;
-//       color: #fff;
-//       border-radius: 0.333333rem;
-//       padding-left: 0.066667rem;
-//       white-space: nowrap;
-//       text-overflow: ellipsis;
-//       overflow: hidden;
-//     }
-//   }
-//   .active {
-//     color: #ff0000;
-//   }
-// }
+.title {
+  h4 {
+    font-size: 0.333333rem;
+    font-weight: 700;
+  }
+}
+.botton {
+  font-size: 0.333333rem;
+  margin: 25px;
+  display: flex;
+  span {
+    border: 0.013333rem solid #dedede;
+    padding: 0.066667rem 0.266667rem;
+    border-radius: 0.333333rem;
+    i {
+      font-size: 0.333333rem;
+    }
+  }
+  :nth-child(2) {
+    i {
+      color: green;
+    }
+  }
+}
 </style>
