@@ -76,9 +76,15 @@ const routes = [
     path: "/search",
     component: () => import("@/views/Search"),
   },
+  //栏目管理
   {
     path: "/programa",
     component: () => import("@/views/Programa"),
+  },
+  //新闻详情页,普通
+  {
+    path: "/newsdetails/:id",
+    component: () => import("@/views/Newsdetails"),
   },
 ];
 

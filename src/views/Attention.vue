@@ -75,10 +75,9 @@ export default {
       }).then(response => {
         const { data } = response.data;
         // console.log(data);
-
-        this.followlist = data; //获取到数据进行赋值
+        // this.followlist = data; //获取到数据进行赋值
         this.followlist.splice(index, 1);
-        console.log(this.followlist);
+        this.followlist = [...this.followlist];
       });
     }
   }

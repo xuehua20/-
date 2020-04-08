@@ -5,7 +5,7 @@
 //npm run serve 打开服务器
 //项目如果push失败 加这命令 git config --global credential.helper manager
 //开启服务器npm run serve
-
+//autofocus 输入框自动聚焦
 //vue的axios请求
 /*
 this.$axios({
@@ -62,3 +62,5 @@ flex-shrink:0 ;防止图片在flex布局下被挤压
 //   规定我们在样式前面加上这个 /deep/
 //页面销毁的时候触发的事件.destroyed()
 //axios.defaults.baseURL = "http://hmtoutiao-api.atlansic.com" 线上地址
+//keep-alive 缓存之前的页面不会被销毁. include 指定谁是否被缓存,它取得是页面属性name的值
+//局部组件路由守卫.判断从哪里来的.我要干嘛

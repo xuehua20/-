@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="content">
-        <div class="text">
+        <div class="text" @click="pathnews(data.id)">
           <h4>{{data.title}}</h4>
           <!-- 图片大于1小于三的时候显示 -->
           <div class="threeimg" v-if="data.type === 1 && data.cover.length >= 3">
@@ -36,6 +36,11 @@ export default {
   props: ["data"],
   mounted() {
     // console.log(this.data);
+  },
+  methods: {
+    pathnews(data) {
+      this.$router.push(`/newsdetails/${data}`);
+    }
   }
 };
 </script>
@@ -69,11 +74,11 @@ export default {
       .threeimg {
         display: flex;
         padding-bottom: 0.133333rem;
-
+        width: 100%;
         img {
           height: 1.6rem;
-          object-fit: cover;
-          width: 95%;
+          object-fit: cover; //让图片不变形
+          width: 2.133333rem;
         }
         :nth-child(3) {
           margin-right: 0;

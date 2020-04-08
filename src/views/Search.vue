@@ -6,32 +6,23 @@
         <i></i>
       </div>
       <div class="searchbtn">
-        <input type="text" />
+        <input type="text" v-model="value" @keyup.enter="inputvalue" placeholder="请输入关键字" autofocus />
         <i class="iconfont iconsearch"></i>
       </div>
-      <div class="search-btn">搜索</div>
+      <div class="search-btn" @click="inputvalue1">搜索</div>
     </div>
     <div class="history">
       <div class="history-title">
         <p>历史记录</p>
-        <span class="iconfont iconjiantou1"></span>
+        <span class="iconfont iconicon-test" @click="deletes"></span>
       </div>
       <div class="history-content">
         <ul>
-          <li>美女美女美女美女美女</li>
-          <li>美女美女</li>
-          <li>美女美女美女美女</li>
-          <li>美女美女美女美女</li>
-          <li>美女美女</li>
-          <li>美女</li>
-          <li>美女</li>
-          <li>美女</li>
-          <li>美女</li>
-          <li>美女</li>
+          <li v-for="(item,index) in historyarr" :key="index" @click="historyitem(item)">{{item}}</li>
         </ul>
       </div>
     </div>
-    <div class="real-time">
+    <!-- <div class="real-time">
       <div class="real-time-title">
         <p>实时热搜</p>
         <span>每分钟更新一次</span>
@@ -52,19 +43,87 @@
           </li>
         </ul>
       </div>
-    </div>
-    <!-- <div class="NetMonitor">
-      <ul>
+    </div>-->
+    <div class="NetMonitor" v-if="showHome">
+      <div v-for="(item,index) in historydata" :key="index">
+        <zujian1 :data="item" />
+      </div>
+      <!-- <ul>
         <li v-for="item in 100" :key="item">
           <p>花露水的妙用</p>
           <span class="iconfont iconjiantou1"></span>
         </li>
-      </ul>
-    </div>-->
+      </ul>-->
+    </div>
   </div>
 </template>
 <script>
-export default {};
+import zujian1 from "../components/zujian1";
+export default {
+  components: {
+    zujian1
+  },
+  data() {
+    return {
+      value: "",
+      historyarr: [],
+      showHome: false,
+      historydata: []
+    };
+  },
+  watch: {
+    value() {
+      //9.搜素情空.内容也清空
+      this.showHome = false;
+    }
+  },
+  methods: {
+    inputvalue() {
+      //1.获取到值追加在数组前面
+      if (this.value != "") {
+        this.historyarr.unshift(this.value);
+        //2.对数组进行去重后存入本地
+        this.historyarr = [...new Set(this.historyarr)];
+        localStorage.setItem("historyarr", JSON.stringify(this.historyarr));
+        //6发送请求获取关键字文章
+        this.getList();
+      } else {
+        this.$toast.success("关键字不能为空");
+      }
+    },
+    inputvalue1() {
+      this.inputvalue();
+    },
+    //清空历史记录
+    deletes() {
+      this.historyarr = [];
+      localStorage.clear();
+    },
+    //请求文章列表
+    getList() {
+      this.$axios({
+        url: "/post_search",
+        params: {
+          keyword: this.value
+        }
+      }).then(Response => {
+        console.log(Response);
+        const { data } = Response.data;
+        console.log(data);
+        this.showHome = true;
+        this.historydata = data;
+      });
+    },
+    historyitem(item) {
+      this.value = item; //把关键字赋值给输入框
+      this.getList();
+    }
+  },
+  mounted() {
+    //2.1从本地拿出数据后渲染到页面上
+    this.historyarr = JSON.parse(localStorage.getItem("historyarr")) || [];
+  }
+};
 </script>
 <style lang="less" scoped>
 .head {
@@ -107,7 +166,7 @@ export default {};
   }
 }
 .history {
-  border-bottom: solid 0.013333rem #c6c6c6;
+  // border-bottom: solid 0.013333rem #c6c6c6;
 
   .history-title {
     display: flex;
@@ -179,7 +238,9 @@ export default {};
   background-color: #fff;
   top: 1.333333rem;
   bottom: 0;
-  width: 95%;
+  // width: 100%;
+  left: 0;
+  right: 0;
   font-size: 0.333333rem;
   ul {
     li {

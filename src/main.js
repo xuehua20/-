@@ -5,8 +5,8 @@ import vant from "vant"; //引入插件
 Vue.use(vant); //注册插件
 import axios from "axios"; //导入ajax请求
 Vue.prototype.$axios = axios; //需要绑定在原型上
-// axios.defaults.baseURL = "http://localhost:3000"; //配置接口地址哪里都能用
-axios.defaults.baseURL = "http://hmtoutiao-api.atlansic.com"; //线上地址
+axios.defaults.baseURL = "http://localhost:3000"; //配置接口地址哪里都能用
+// axios.defaults.baseURL = "http://hmtoutiao-api.atlansic.com"; //线上地址
 import Vant, { Toast } from "vant"; //引入vant axios错误拦截器
 //生产坏境是否提示,就是上线的时候是否提示信息
 Vue.config.productionTip = false;
