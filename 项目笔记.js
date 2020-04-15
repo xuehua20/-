@@ -64,3 +64,4 @@ flex-shrink:0 ;防止图片在flex布局下被挤压
 //axios.defaults.baseURL = "http://hmtoutiao-api.atlansic.com" 线上地址
 //keep-alive 缓存之前的页面不会被销毁. include 指定谁是否被缓存,它取得是页面属性name的值
 //局部组件路由守卫.判断从哪里来的.我要干嘛
+//钩子函数 activated 只能是在缓存页面组件里面有有效.  当组件被渲染的时候就会执行,每次渲染都会执行

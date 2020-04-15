@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <input type="text" />
+    <input type="text" placeholder="发布评论" />
     <span class="iconfont iconpinglun-">
       <i>{{post.comment_length > 100 ? `99+` : post.comment_length}}</i>
     </span>
@@ -55,6 +55,7 @@ export default {
   }
   span {
     position: relative;
+    margin-right: 0.133333rem !important;
     i {
       position: absolute;
       top: -2px;
@@ -72,6 +73,9 @@ export default {
   }
   .active {
     color: #ff0000;
+  }
+  i {
+    margin-right: 0.133333rem !important;
   }
 }
 </style>

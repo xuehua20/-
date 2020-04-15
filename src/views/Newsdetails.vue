@@ -34,6 +34,9 @@
           微信
         </span>
       </div>
+      <div class="nav" @click="pathe">
+        <router-link to>点我查看更多精彩评论>>></router-link>
+      </div>
     </div>
     <bottomnav :post="this.post" />
     <!-- <div class="footer">
@@ -61,7 +64,9 @@ export default {
         user: {}
       },
       moment, //日期格式插件
-      token: {}
+      token: {},
+      commentlist: [], //评论列表
+      arr2: []
     };
   },
   mounted() {
@@ -142,6 +147,17 @@ export default {
         }
         this.$toast.success(message); //弹窗提示
       });
+    },
+    //跳转精彩跟帖
+    pathe() {
+      console.log(this.$route.path);
+      this.$router.replace({
+        path: "/goodcomments",
+        //quey代表问号后面的路径
+        query: {
+          return_url: this.$route.path
+        }
+      });
     }
   }
 };
@@ -210,6 +226,12 @@ export default {
       i {
         color: green;
       }
+    }
+  }
+  .nav {
+    color: #c9c9c9;
+    a {
+      text-align: right;
     }
   }
 }

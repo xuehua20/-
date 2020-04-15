@@ -22,7 +22,7 @@
         v-for="(item,index) in Categorylist"
         :key="index"
         :title="item.name"
-        v-if="item.is_top===1"
+        v-if="item.is_top===1|| item.name === `2`"
       >
         <!-- 下拉刷新 -->
         <!-- @refresh="onRefresh" -->
@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       token: "", //本地token值
-      active: 1,
+      active: 0,
       refreshing: false,
       // finished: false,
       // loading: false,
@@ -91,11 +91,13 @@ export default {
     this.token = token;
     //4.渲染数据前进行判断判断
     //4.2如果本地有数据.就不请求文章栏目列表了
+
     if (Categorylist) {
       //4.3进行是否是登录状态,1.有登录但是第一条名字不是关注的,或者第一条是关注,但是没有登录的.都重新求一次,
+      // debugger;
       if (
-        (token && Categorylist[0].name != "关注") ||
-        (Categorylist[0].name === "关注" && !token)
+        (Categorylist[0].name !== "关注" && this.token) ||
+        (Categorylist[0].name === "关注" && this.token === undefined)
       ) {
         this.getCategorylist();
         // this.handleCategories(); //循环加上自己的页数等,并且请求文章列表
@@ -108,6 +110,7 @@ export default {
       //4.4本地没有数据的请求一次
       this.getCategorylist();
       // this.handleCategories();,把请求直接放在请求栏目列表的时候就操作了
+      console.log(this.Categorylist);
     }
   },
   methods: {
@@ -129,8 +132,14 @@ export default {
       }
       this.$axios(config).then(Response => {
         const { data } = Response.data;
+        // 给数组最后添加一个跳转到栏目管理的图标
+        data.push({
+          name: "2"
+        });
         //2.3赋值给data里面
+
         this.Categorylist = data;
+
         //2.4存储进本地
         localStorage.setItem("Categorylistdata", JSON.stringify(data));
         this.handleCategories();
@@ -211,6 +220,17 @@ export default {
       this.Categorylist[this.active].scrollY = scrollTop;
     }
   }
+  //局部路由导航守卫
+  // from 从哪里来
+  //vm回调函数.可使用this
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     //如果是从首页来的就清空搜索记录
+  //     if (from.path === "/programa") {
+
+  //     }
+  //   });
+  // }
 };
 </script>
 <style lang="less" scoped>
@@ -269,12 +289,13 @@ export default {
   .administration {
     //控制箭头的
     background-color: #e4e4e4;
-    width: 0.773333rem;
+    width: 0.733333rem;
     height: 44px;
     position: absolute;
     right: 0;
     top: 0;
     text-align: center;
+    margin-left: 0.2rem;
     a {
       position: absolute;
       width: 44px;

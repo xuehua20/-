@@ -69,7 +69,6 @@ export default {
       }).then(response => {
         const { message, data } = response.data;
         //把数据存到本地存储
-        debugger;
         localStorage.setItem("data", JSON.stringify(data));
         //登录后去到哪里,有地址就跳地址.什么都没有才到个人中心
         if (this.$route.query.return_url != undefined) {

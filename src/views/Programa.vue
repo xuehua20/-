@@ -41,7 +41,7 @@ export default {
         title: "栏目管理",
         path: () => {
           //点击返回个人中心
-          this.$router.replace("/personal");
+          this.$router.replace("/index");
         }
       },
       Categorys: [],
@@ -89,6 +89,10 @@ export default {
   destroyed() {
     //6.1把两个数组合并后保存到本地
     this.Categorys = [...this.itemtop, ...this.itembottom];
+    // 给数组最后添加一个跳转到栏目管理的图标
+    this.Categorys.push({
+      name: "2"
+    });
     console.log(this.Categorys);
     //6.2保存的原本的数组里面
     localStorage.setItem("Categorylistdata", JSON.stringify(this.Categorys));

@@ -91,6 +91,11 @@ const routes = [
     path: "/video/:id",
     component: () => import("@/views/Video"),
   },
+  //精彩跟贴
+  {
+    path: "/goodcomments",
+    component: () => import("@/views/Goodcomments"),
+  },
 ];
 
 const router = new VueRouter({
